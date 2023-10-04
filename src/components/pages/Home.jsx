@@ -6,8 +6,11 @@ import Navbar from "./../layout components/navbar/Navbar";
 import LeftSidebar from "./../layout components/sidebars/LeftSidebar";
 import RightSidebar from "./../layout components/sidebars/RightSidebar";
 import NewsColumn from "./../layout components/NewsColumn";
+import { useLoaderData } from "react-router-dom";
 
 const Home = () => {
+  const news = useLoaderData();
+  console.log(news);
   return (
     <div className=" md:max-w-4xl lg:max-w-7xl mx-auto">
       <Header></Header>
@@ -23,7 +26,12 @@ const Home = () => {
       <Navbar></Navbar>
       <div className="grid grid-cols-4 gap-5 mx-auto">
         <LeftSidebar></LeftSidebar>
-        <NewsColumn></NewsColumn>
+        <div className="col-span-2 border">
+          {news.map((aNews) => (
+            <NewsColumn key={aNews._id} aNews={aNews}></NewsColumn>
+          ))}
+        </div>
+
         <RightSidebar></RightSidebar>
       </div>
     </div>
